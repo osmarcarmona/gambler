@@ -43,7 +43,7 @@ class Resultado(models.Model):
         return reverse('myrestaurants:restaurant_detail', kwargs={'pk': self.pk})
 
 class Equipo(models.Model):
-    //idREquipo = models.IntegerField(primary_key=True)
+    /idREquipo = models.IntegerField(primary_key=True)
     nombreEquipo = models.TextField()
 
 
