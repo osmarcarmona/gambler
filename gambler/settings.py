@@ -1,5 +1,5 @@
 """
-Django settings for myrecommendations project.
+Django settings for gambler project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -98,9 +98,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'myrecommendations.urls'
+ROOT_URLCONF = 'gambler.urls'
 
-WSGI_APPLICATION = 'myrecommendations.wsgi.application'
+WSGI_APPLICATION = 'gambler.wsgi.application'
 
 
 # Database
