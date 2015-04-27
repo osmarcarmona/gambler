@@ -40,11 +40,11 @@ class RestaurantList(ListView, ConnegResponseMixin):
     model = Restaurant
     queryset = Restaurant.objects.filter(date__lte=timezone.now()).order_by('date')[:5]
     context_object_name = 'latest_restaurant_list'
-    template_name = 'myrestaurants/restaurant_list.html'
+    template_name = 'beds/restaurant_list.html'
 
 class RestaurantDetail(DetailView, ConnegResponseMixin):
     model = Restaurant
-    template_name = 'myrestaurants/restaurant_detail.html'
+    template_name = 'beds/restaurant_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(RestaurantDetail, self).get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class RestaurantDetail(DetailView, ConnegResponseMixin):
 
 class RestaurantCreate(CreateView):
     model = Restaurant
-    template_name = 'myrestaurants/form.html'
+    template_name = 'beds/form.html'
     form_class = RestaurantForm
 
     def form_valid(self, form):
@@ -62,7 +62,7 @@ class RestaurantCreate(CreateView):
 
 class DishCreate(CreateView):
     model = Dish
-    template_name = 'myrestaurants/form.html'
+    template_name = 'beds/form.html'
     form_class = DishForm
 
     def form_valid(self, form):
@@ -78,4 +78,4 @@ def review(request, pk):
         user=request.user,
         restaurant=restaurant)
     new_review.save()
-    return HttpResponseRedirect(urlresolvers.reverse('myrestaurants:restaurant_detail', args=(restaurant.id,)))
+    return HttpResponseRedirect(urlresolvers.reverse('beds:restaurant_detail', args=(restaurant.id,)))

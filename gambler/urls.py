@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'gambler.views.home', name='home'),
     # url(r'^gambler/', include('gambler.foo.urls')),
 
-    url(r'^myrestaurants/', include('myrestaurants.urls', namespace='myrestaurants')),
+    url(r'^beds/', include('beds.urls', namespace='beds')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
 

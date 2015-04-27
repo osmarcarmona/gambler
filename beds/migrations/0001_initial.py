@@ -14,47 +14,62 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Dish',
+            name='Apuesta',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.TextField()),
-                ('description', models.TextField(null=True, blank=True)),
-                ('price', models.DecimalField(null=True, verbose_name=b'Euro amount', max_digits=8, decimal_places=2, blank=True)),
-                ('image', models.ImageField(null=True, upload_to=b'myrestaurants', blank=True)),
-                ('date', models.DateField(default=datetime.date.today)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Restaurant',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.TextField()),
-                ('street', models.TextField(null=True, blank=True)),
-                ('number', models.IntegerField(null=True, blank=True)),
-                ('city', models.TextField(default=b'')),
-                ('zipCode', models.TextField(null=True, blank=True)),
-                ('stateOrProvince', models.TextField(null=True, blank=True)),
-                ('country', models.TextField(null=True, blank=True)),
-                ('telephone', models.TextField(null=True, blank=True)),
-                ('web', models.URLField(null=True, blank=True)),
-                ('date', models.DateField(default=datetime.date.today)),
                 ('user', models.ForeignKey(default=1, to=settings.AUTH_USER_MODEL)),
+                ('partido', models.ForeignKey(to='beds.Partido')),
+                ('apuesta', models.DecimalField(max_digits=11, decimal_places=2)),
+                ('cuota', models.DecimalField(max_digits=3, decimal_places=2)),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='RestaurantReview',
+            name='Partido',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('jornada', models.IntegerField()),
+                ('fecha', models.DateField(default=datetime.date.today)),
+                ('equipoLocal', models.ForeignKey(to='beds.Equipo')),
+                ('equipoVisitante', models.ForeignKey(to='beds.Equipo')),
+                ('resultado', models.ForeignKey(to='beds.Resultado')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Resultado',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('partido', models.ForeignKey(to='beds.Partido')),
+                ('golLocal', models.ForeignKey(to='beds.Equipo')),
+                ('golVisitante', models.ForeignKey(to='beds.Equipo')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Equipo',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('nombreEquipo', models.TextField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ApuestaReview',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('rating', models.PositiveSmallIntegerField(default=3, verbose_name=b'Ratings (stars)', choices=[(1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5')])),
                 ('comment', models.TextField(null=True, blank=True)),
                 ('date', models.DateField(default=datetime.date.today)),
-                ('restaurant', models.ForeignKey(to='myrestaurants.Restaurant')),
+                ('apuesta', models.ForeignKey(to='beds.Apuesta')),
                 ('user', models.ForeignKey(default=1, to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -65,7 +80,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dish',
             name='restaurant',
-            field=models.ForeignKey(related_name='dishes', to='myrestaurants.Restaurant', null=True),
+            field=models.ForeignKey(related_name='dishes', to='beds.Restaurant', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
