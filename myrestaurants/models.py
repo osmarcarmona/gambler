@@ -56,4 +56,4 @@ class Equipo(models.Model):
         abstract = True
 
 class ApuestasReview(Review):
-    restaurant = models.ForeignKey(Restaurant)
+    apuestas = models.ForeignKey(Apuestas)
