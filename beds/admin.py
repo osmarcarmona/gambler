@@ -1,6 +1,7 @@
-import models
+from beds import models
 from django.contrib import admin
 
-admin.site.register(models.Restaurant)
-admin.site.register(models.Dish)
-admin.site.register(models.RestaurantReview)
+admin.site.register(models.Apuesta)
+admin.site.register(models.Partido)
+admin.site.register(models.Resultado)
+admin.site.register(models.Equipo)
